@@ -1,9 +1,8 @@
 import { View,TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 import { styles } from '../styles/styles'
 
-export default function AppBar() {
-  console.log("Child render")
+function AppBar() {
   return (
     <View style={styles.appBar}>
       <TouchableOpacity style={styles.appBar_img}>
@@ -13,3 +12,5 @@ export default function AppBar() {
     </View>
   )
 }
+
+export default memo(AppBar)

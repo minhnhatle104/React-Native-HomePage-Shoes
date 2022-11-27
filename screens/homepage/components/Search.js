@@ -1,10 +1,10 @@
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { memo} from 'react'
 import { styles } from '../styles/styles'
 import { useDispatch } from 'react-redux'
 import { searchShoe } from '../../../redux/ReduxStateSlice'
 
-export default function Search() {
+function Search() {
   const dispatch = useDispatch()
 
   return (
@@ -31,3 +31,5 @@ export default function Search() {
     </View>
   )
 }
+
+export default memo(Search)
