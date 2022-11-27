@@ -1,21 +1,13 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getListShoe } from '../../../redux/ShoeThunk'
+import React from 'react'
 import StaggeredList from '@mindinventory/react-native-stagger-view'
 import { Dimensions } from 'react-native';
 import { styles } from '../styles/styles'
 
-export default function ShoeMenu() {
-  const { listShoe } = useSelector(state => state.ReduxReducer)
-  const dispatch = useDispatch()
+export default function ShoeMenu(props) {
+  const {listShoe} = props
 
   const SCREEN_WIDTH = Dimensions.get('window').width;
-
-  useEffect(() => {
-    dispatch(getListShoe())
-  }, [])
-
 
   const getChildrenStyle = (id) => {
     const styleHeight = id%2==0 ? Number(0.75*20+12)*10 : Number(0.87*20+12)*10
@@ -56,7 +48,6 @@ export default function ShoeMenu() {
       <StaggeredList
       data={listShoe}
       numColumns={2}
-      animationType={'FADE_IN_FAST'}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => renderChildren(item)}
     />

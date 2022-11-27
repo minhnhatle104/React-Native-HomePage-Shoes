@@ -1,11 +1,9 @@
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
-import React, { memo} from 'react'
+import React, { memo } from 'react'
 import { styles } from '../styles/styles'
-import { useDispatch } from 'react-redux'
-import { searchShoe } from '../../../redux/ReduxStateSlice'
 
-function Search() {
-  const dispatch = useDispatch()
+function Search(props) {
+  const { filterShoe } = props
 
   return (
     <View style={styles.search}>
@@ -18,14 +16,14 @@ function Search() {
             <Image source={require("../../../assets/images/search.png")} style={styles.img28} />
           </TouchableOpacity>
           <View>
-            <TextInput onChangeText={newText=>{
-              dispatch(searchShoe(newText))
+            <TextInput onChangeText={newText => {
+              filterShoe(newText)
             }} placeholder='Search Shoes' />
           </View>
         </View>
 
         <View style={styles.search_view_filter}>
-          <Image source={require("../../../assets/images/filter.png")} style={[styles.img50,{alignSelf:"center"}]} />
+          <Image source={require("../../../assets/images/filter.png")} style={[styles.img50, { alignSelf: "center" }]} />
         </View>
       </View>
     </View>
