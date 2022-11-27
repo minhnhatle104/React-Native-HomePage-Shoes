@@ -1,19 +1,65 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getListShoe } from '../../../redux/ShoeThunk'
+import StaggeredList from '@mindinventory/react-native-stagger-view'
+import { Dimensions } from 'react-native';
+import { styles } from '../styles/styles'
 
 export default function ShoeMenu() {
-    const {listShoe} = useSelector(state => state.ReduxReducer)
-    const dispatch=useDispatch()
+  const { listShoe } = useSelector(state => state.ReduxReducer)
+  const dispatch = useDispatch()
 
-    useEffect(()=>{
-        dispatch(getListShoe())
-    },[])
+  const SCREEN_WIDTH = Dimensions.get('window').width;
+
+  useEffect(() => {
+    dispatch(getListShoe())
+  }, [])
+
+
+  const getChildrenStyle = (id) => {
+    const styleHeight = id%2==0 ? Number(0.75*20+12)*10 : Number(0.87*20+12)*10
+
+    return {
+      width: (SCREEN_WIDTH - 50) / 2,
+      height: styleHeight,
+      backgroundColor: 'white',
+      margin: 4,
+      padding:4,
+      borderRadius: 18,
+    };
+  };
+
+  const renderChildren = (item) => {
+    return <TouchableOpacity style={getChildrenStyle(item.id)} key={item.id}>
+      <View style={{height:"100%",width:"100%",justifyContent:"center"}}>
+        <TouchableOpacity style={styles.likeContain}>
+          <Image source={require("../../../assets/images/heart.png")} style={styles.likeContain_heart}/>
+        </TouchableOpacity>
+        <Image
+          onError={() => { }}
+          style={{height:"50%",width:"100%",alignSelf:"center"}}
+          source={{
+            uri: item.image,
+          }}
+          resizeMode={'cover'}
+        />
+        <Text style={styles.shoeName}>{item.name}</Text>
+        <Text style={styles.shoeDesc}>Shoe</Text>
+        <Text style={styles.shoePrice}>£{item.price}</Text>
+      </View>
+    </TouchableOpacity>
+  }
 
   return (
-    <View>
-      <Text>ShoeMenu</Text>
+    <View style={{flex:1,padding:15}}>
+      <StaggeredList
+      data={listShoe}
+      numColumns={2}
+      animationType={'FADE_IN_FAST'}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) => renderChildren(item)}
+    />
     </View>
   )
 }

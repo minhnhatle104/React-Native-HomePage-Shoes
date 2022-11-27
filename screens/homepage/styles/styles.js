@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         height: 28,
         width: 28
     },
-    img32:{
+    img50:{
         height: 50,
         width: 50
     },
@@ -61,5 +61,35 @@ export const styles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 20,
         justifyContent:"center"
+    },
+    likeContain:{
+        height:36,
+        width:36,
+        position:"absolute",
+        top:0,
+        backgroundColor:"black",
+        borderRadius:20,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    likeContain_heart:{
+        height:36,
+        width:36,
+        position:"absolute",
+        tintColor:"white",
+        alignSelf:"center"
+    },
+    shoeName:{
+        fontSize:25,
+        fontWeight:"700",
+        color:"black"
+    },
+    shoeDesc:{
+        fontSize:18,
+    },
+    shoePrice:{
+        fontSize:20,
+        fontWeight:"700",
+        color:"black"
     }
 })

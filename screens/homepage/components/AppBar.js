@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View,TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { styles } from '../styles/styles'
 
 export default function AppBar() {
+  console.log("Child render")
   return (
     <View style={styles.appBar}>
       <TouchableOpacity style={styles.appBar_img}>
